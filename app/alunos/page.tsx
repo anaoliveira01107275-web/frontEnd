@@ -1,5 +1,4 @@
 import AlunoItem from "@/components/AlunoItem";
-import { User } from "lucide-react";
 
 export default async function AlunosPage() {
     const alunos = await fetch("http://localhost:8080/alunos").
