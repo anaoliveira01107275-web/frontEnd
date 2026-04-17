@@ -22,7 +22,7 @@ export async function loginAction(email: string, password: string) {
 
     if (response.status === 200){
         const cookiesStore = await cookies();
-        cookiesStore.set("acess_token", data.acess_token);
+        cookiesStore.set("access_token", data.access_token);
         return;
     }
 

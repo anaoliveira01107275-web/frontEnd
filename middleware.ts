@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
 export function middleware(request: NextRequest){
-    const token = request.cookies.get("acess_token")?.value;
+    const token = request.cookies.get("access_token")?.value;
 
     console.log(token);
 
