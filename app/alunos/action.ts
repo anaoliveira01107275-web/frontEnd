@@ -1,3 +1,4 @@
+import { Aluno } from "@/interfaces/alunos";
 import { cookies } from "next/headers";
 
 export async function getAlunos() {
@@ -17,5 +18,5 @@ export async function getAlunos() {
     return[];
 });
 
-return response;
+return response as Aluno[];
 }
