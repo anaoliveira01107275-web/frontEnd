@@ -5,8 +5,6 @@ import  Link  from "next/link";
 export default async function AlunosPage() {
     const alunos = await getAlunos();
 
-    console.log(alunos);
-
     return (
         <div className="w-full min-h-screen flex flex-col items-center bg-gray-100 p-8">
              

@@ -3,6 +3,8 @@ import { Aluno } from "@/interfaces/alunos";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getAluno } from "./actions";
+import  { PenBox } from "lucide-react";
+import Link from "next/link";
 
 export default function AlunoPage() {
     const { id } = useParams();
@@ -15,9 +17,16 @@ export default function AlunoPage() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-zinc-100">
             <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+            <div className="flex gap-2">
                 <h1 className="text-2xl font-bold text-center text-zinc-800 mb-6">
-                    Detalhes do Aluno
+                    {aluno.nome}
                 </h1>
+
+                <Link href={`/aluno/${id}/editar`}>
+                    <PenBox/>
+
+                </Link>
+            </div>
 
                 <div className="space-y-4">
                     <div className="bg-zinc-50 p-4 rounded-lg">

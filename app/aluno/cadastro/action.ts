@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 import { cookies } from "next/headers"; 
 
 interface CreateAluno {
@@ -31,6 +32,10 @@ export async function createAluno(aluno: CreateAluno) {
     if(response.status === 201) {
         revalidateTag("listar", "max");
         return;
+    }
+
+    if (response.status === 401) {
+        redirect("/login");
     }
 
     return data;

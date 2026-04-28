@@ -18,7 +18,6 @@ export async function getAluno(id: number) {
         console.error(e);
         return{};
     })
-console.log(response)
     return response as Aluno;
 
 
