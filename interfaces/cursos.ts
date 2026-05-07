@@ -1,15 +1,15 @@
 import { AlunoData } from "./alunos";
 
-export interface CursoData {
+export interface CursoDate {
     id: number;
-    nome: string;
-    professor?: string;
-    cargaHoraria: string;
+    curso: string;
+    professor: string;
+    cargaHoraria: number;
     descricao: string;
     createdAt: Date;
     updateAt: Date;
 }
 
-export interface Curso extends CursoData {
+export interface Curso extends CursoDate {
     alunos: AlunoData[];
 }

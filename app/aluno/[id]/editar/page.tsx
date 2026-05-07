@@ -1,24 +1,39 @@
 "use client";
 import { Aluno } from "@/interfaces/alunos";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { getAluno } from "../actions";
+import { useEffect, useState, SubmitEvent } from "react";
+import { getAluno, updateAluno } from "../actions";
+import { useRouter } from "next/navigation";
 
 export default function AlunoPage() {
     const { id } = useParams();
     const [aluno, setAluno] = useState({} as Aluno);
+    const router = useRouter();
+
 
     useEffect(() => {
         getAluno(Number(id)).then((response) => setAluno(response));
     }, [id]);
 
-    function handleChange(value: string, key: keyof Aluno) {
+    function handleChange(value: string|number, key: keyof Aluno) {
         setAluno(oldState => ({ ...oldState, [key]: value }));
+    }
+
+    async function handleUpdate(e: SubmitEvent) {
+        e.preventDefault();
+        const response = await updateAluno(Number(id), aluno);
+
+        if (response) {
+            alert(response);
+            return;
+        }
+
+        router.push(`/aluno/${id}`);
     }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200">
-            <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md space-y-6">
+            <form className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md space-y-6" onSubmit={handleUpdate}>
                 
                 <h1 className="text-2xl font-bold text-center text-zinc-800">
                     Editar Aluno
@@ -40,7 +55,7 @@ export default function AlunoPage() {
                         <input
                             className="border border-zinc-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={aluno.cpf || ""}
-                            onChange={(e) => handleChange(e.target.value, "cpf")}
+                            onChange={(e) => handleChange(Number(e.target.value), "cpf")}
                         />
                     </div>
 
@@ -53,6 +68,15 @@ export default function AlunoPage() {
                         />
                     </div>
 
+                        <div className="flex flex-col">
+                        <label className="text-sm text-zinc-600 mb-1">Idade</label>
+                        <input
+                            className="border border-zinc-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            value={aluno.idade || ""}
+                            onChange={(e) => handleChange(Number(e.target.value), "idade")}
+                        />
+                    </div>
+
                 </div>
 
                 <button
@@ -61,7 +85,8 @@ export default function AlunoPage() {
                     Salvar
                 </button>
 
-            </div>
+            </form>
         </div>
+        
     );
 }

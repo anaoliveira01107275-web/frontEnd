@@ -1,4 +1,4 @@
-import { CursoData } from "./cursos";
+import { CursoDate} from "./cursos";
 
 export interface AlunoData {
     id: number;
@@ -11,5 +11,5 @@ export interface AlunoData {
 }
 
 export interface Aluno extends AlunoData {
-    cursos: CursoData[];
+    cursos: CursoDate[];
 }
